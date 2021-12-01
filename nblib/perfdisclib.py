@@ -68,14 +68,14 @@ class Analysis:
         return df
 
     @staticmethod
-    def filter_and_merge(dfa: pd.DataFrame, dfb: pd.DataFrame, task_filters: typ.List[typ.Pattern]):
+    def filter_and_merge(dfa: pd.DataFrame, dfb: pd.DataFrame):
         """Filter and merge the tasks from the 2 commits"""
 
-        def filter_canaries(df: pd.DataFrame):
-            df_filtered = df
-            for task_filter in task_filters:
-                df_filtered = df_filtered[~df_filtered.test.str.contains(task_filter)]
-
+        # TODO: Make filters user configurable
+        def filter_canaries(df):
+            df_filtered = df[~df.test.str.match(
+                'CleanUp|canary|fio|iperf|NetworkBandwidth|finishing|Setup|Quiesce|GennyOverhead')]
+            df_filtered = df_filtered[~df_filtered.test.str.contains('ActorFinished|ActorStarted|Setup')]
             return df_filtered
 
         print(f"dfa length = {len(dfa)}, dfb length = {len(dfb)}")
