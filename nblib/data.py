@@ -31,7 +31,7 @@ class PerfAtlasClient(Client):
     """Client connection to perf atlas db. """
 
     def __init__(self):
-        self.auth = AtlasAuth(user=os.getenv("PERF_DB_READ_USER"), password=os.getenv("ERF_DB_READ_PASSWORD"))
+        self.auth = AtlasAuth(user=os.getenv("PERF_DB_READ_USER"), password=os.getenv("PERF_DB_READ_PASSWORD"))
 
     def conn(self) -> ClientConnection:
         """Return client connection."""
