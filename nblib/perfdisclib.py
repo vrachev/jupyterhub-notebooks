@@ -110,5 +110,5 @@ class Analysis:
 
         print(f"length after keeping interesting metrics = {len(found_ts)}")
 
-        return dfa, dfb
+        return comparison, found_ts
 
